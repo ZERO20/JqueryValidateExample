@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Jquery Validate Example</title>
+	<script src="./assets/js/jquery-1.7.2.js"></script>
+	<script src="./assets/js/jquery.validate.js"></script>
+	<link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+	<form action="" id="form-test">
+		<label for="name">Name</label>
+		<input type="text" id="name" name="name">
+		<label for="phone">Phone Number</label>
+		<input type="text" id="phone" name="phone" onkeyup="validateForm();">
+	</form>
+	<script>
+		var validator;
+		$(document).ready(function(){
+			 validator = $('#form-test').validate({
+			 	errorClass: "my-error-class",
+    			validClass: "my-valid-class",
+				rules:{
+					name:{
+						required: true
+					},
+					phone:{
+						required: true,
+						number: true
+					}
+				},
+    			errorPlacement: function(label, element) {
+        			label.css('font-size','11px');
+        			label.insertAfter(element);
+        			//here set class to parent
+    			},
+    			wrapper: 'span'
+			});			
+		});
+
+		function validateForm() {					
+			validator.form();
+			console.log('The form is valid?', $('#form-test').valid());
+		}
+	</script>
+</body>
+</html>
